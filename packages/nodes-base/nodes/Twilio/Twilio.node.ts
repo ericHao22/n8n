@@ -43,11 +43,18 @@ export class Twilio implements INodeType {
 						name: 'SMS',
 						value: 'sms',
 					},
+					{
+						name: 'Voice',
+						value: 'voice',
+					},
 				],
 				default: 'sms',
 				description: 'The resource to operate on.',
 			},
 
+			// ----------------------------------
+			//         sms
+			// ----------------------------------
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -69,11 +76,6 @@ export class Twilio implements INodeType {
 				default: 'send',
 				description: 'The operation to perform.',
 			},
-
-
-			// ----------------------------------
-			//         sms
-			// ----------------------------------
 
 			// ----------------------------------
 			//         sms:send
@@ -150,6 +152,159 @@ export class Twilio implements INodeType {
 					},
 				},
 				description: 'The message to send',
+			},
+
+			// ----------------------------------
+			//         voice
+			// ----------------------------------
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				displayOptions: {
+					show: {
+						resource: [
+							'voice',
+						],
+					},
+				},
+				options: [
+					{
+						name: 'Call',
+						value: 'call',
+						description: 'Make outbound phone call',
+					},
+				],
+				default: 'call',
+				description: 'The operation to perform.',
+			},
+
+			// ----------------------------------
+			//         voice:call
+			// ----------------------------------
+			{
+				displayName: 'From',
+				name: 'from',
+				type: 'string',
+				default: '',
+				placeholder: '+14155238886',
+				required: true,
+				displayOptions: {
+					show: {
+						operation: [
+							'call',
+						],
+						resource: [
+							'voice',
+						],
+					},
+				},
+				description: 'The number from which to make phone call',
+			},
+			{
+				displayName: 'To',
+				name: 'to',
+				type: 'string',
+				default: '',
+				placeholder: '+14155238886',
+				required: true,
+				displayOptions: {
+					show: {
+						operation: [
+							'call',
+						],
+						resource: [
+							'voice',
+						],
+					},
+				},
+				description: 'The number to which to make phone call',
+			},
+			{
+				displayName: 'Message',
+				name: 'message',
+				type: 'string',
+				default: '',
+				required: true,
+				displayOptions: {
+					show: {
+						operation: [
+							'call',
+						],
+						resource: [
+							'voice',
+						],
+					},
+				},
+				description: 'The message to speak by text to speech',
+			},
+			{
+				displayName: 'Voice',
+				name: 'voice',
+				type: 'options',
+				options: [
+					{
+						name: 'Man',
+						value: 'man',
+					},
+					{
+						name: 'Woman',
+						value: 'woman',
+					},
+				],
+				default: 'man',
+				required: true,
+				displayOptions: {
+					show: {
+						operation: [
+							'call',
+						],
+						resource: [
+							'voice',
+						],
+					},
+				},
+				description: 'The voice engines used by text to speech',
+			},
+			{
+				displayName: 'Language',
+				name: 'lang',
+				type: 'options',
+				options: [
+					{
+						name: 'En',
+						value: 'en',
+					},
+					{
+						name: 'En-Gb',
+						value: 'en-gb',
+					},
+					{
+						name: 'Es',
+						value: 'es',
+					},
+					{
+						name: 'Fr',
+						value: 'fr',
+					},
+					{
+						name: 'De',
+						value: 'de',
+					},
+				],
+				default: 'en',
+				required: true,
+				displayOptions: {
+					show: {
+						operation: [
+							'call',
+						],
+						resource: [
+							'voice',
+						],
+					},
+				},
+				description: 'The language and locale used by text to speech',
 			},
 		],
 	};
