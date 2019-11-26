@@ -356,6 +356,25 @@ export class Twilio implements INodeType {
 				} else {
 					throw new Error(`The operation "${operation}" is not known!`);
 				}
+			} else if (resource === 'voice') {
+				if (operation === 'call') {
+					// ----------------------------------
+					//         voice:call
+					// ----------------------------------
+					const message = this.getNodeParameter('message', i) as string;
+					const voice = this.getNodeParameter('voice', i) as string;
+					const lang = this.getNodeParameter('lang', i) as string;
+
+					requestMethod = 'POST';
+					endpoint = '/Calls.json';
+
+					body.From = this.getNodeParameter('from', i) as string;
+					body.To = this.getNodeParameter('to', i) as string;
+					body.Twiml = '<?xml version="1.0" encoding="UTF-8"?>' +
+								 `<Response><Say voice="${voice}" language="${lang}">${message}</Say></Response>`;
+				} else {
+					throw new Error(`The operation "${operation}" is not known!`);
+				}
 			} else {
 				throw new Error(`The resource "${resource}" is not known!`);
 			}
